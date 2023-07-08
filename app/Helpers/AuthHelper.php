@@ -14,7 +14,7 @@ class AuthHelper
 {
     public static function login($user_email, $password)
     {
-        require_once base_path('public_html/wp-includes/pluggable.php');
+        require_once '/home/n1488259/public_html/wp-includes/pluggable.php';
 
         try{
             $user = User::where("user_email", $user_email)->first();
