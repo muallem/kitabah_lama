@@ -67,5 +67,6 @@ class AuthHelper
     public static function logout()
     {
         Session::flush();
+        Session::forget('token');
     }
 }
