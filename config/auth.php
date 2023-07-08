@@ -64,6 +64,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
             'user_email' => 'user_email',
+            'table' => 'wpjs_users',
         ],
 
         // 'users' => [
