@@ -88,6 +88,7 @@
                 contentType: false,
                 success: function(response) {
                     let data = response;
+                    console.log(data)
                     if(data.message !== 'success'){
                             Swal.fire({
                             type: 'error',
