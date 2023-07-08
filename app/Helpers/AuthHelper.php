@@ -19,6 +19,7 @@ class AuthHelper
     {
         try{
             $user = User::where("user_email", $user_email)->first();
+            return $password;
             if(password_verify($password, $user->user_pass)){
                 return $user;
             }
