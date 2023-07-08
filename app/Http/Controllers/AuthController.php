@@ -25,13 +25,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        AuthHelper::logout($request->ip());
+        AuthHelper::logout();
         return redirect()->route('login');
     }
 
-    public function validate_ip_address(Request $request)
-    {
-        $result = AuthHelper::validate_ip_address($request->ip() );
-        return $result;
-    }
 }
