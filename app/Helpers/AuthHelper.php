@@ -14,16 +14,32 @@ class AuthHelper
 {
     public static function login($user_email, $password)
     {
-        require_once '/home/n1488259/public_html/wp-includes/pluggable.php';
+        // require_once '/home/n1488259/public_html/wp-includes/pluggable.php';
 
-        try{
+        // try{
+        //     $user = User::where("user_email", $user_email)->first();
+        //     return wp_check_password($password, $user->user_pass);
+        //     if(password_verify($password, $user->user_pass)){
+        //         return $user;
+        //     }
+        //     return false;
+        // }catch(Exception $e){
+        //     return $e;
+        // }
+        // Include the necessary parts of the pluggable.php file
+        require_once '/home/n1488259/public_html/wp-includes/class-phpass.php';
+
+        try {
+            // Your login logic here
             $user = User::where("user_email", $user_email)->first();
-            return wp_check_password($password, $user->user_pass);
-            if(password_verify($password, $user->user_pass)){
+            $hasher = new \PasswordHash(8, true);
+
+            if ($hasher->CheckPassword($password, $user->user_pass)) {
                 return $user;
             }
+            
             return false;
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
     }
