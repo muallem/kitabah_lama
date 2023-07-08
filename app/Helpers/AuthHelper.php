@@ -24,18 +24,17 @@ class AuthHelper
             // Your login logic here
             $user = User::where("user_email", $user_email)->first();
             $hasher = new \PasswordHash(8, true);
-
-            if ($hasher->CheckPassword($password, $user->user_pass)) {
-                $expired_time = Carbon::now()->format('Y-m-d').' 23:59:00';
-                $token = Encoder::encode($user->user_email.';'.$expired_time, env('APP_SECRET_KEY'));
-
-                Session::flush();
-                Session::put('token', $token);
-                $data['message'] = "success";
-                return $data;
+            if(!$user){
+                return response()->json(['message' => 'Not permitted', 'ok' => false], 402);
             }
-            $data['message'] = "failed";
-            return $data;
+            if (!$hasher->CheckPassword($password, $user->user_pass)) {
+                return response()->json(['message' => 'Not permitted', 'ok' => false], 402);
+            }
+            $expired_time = Carbon::now()->format('Y-m-d').' 23:59:00';
+            $token = Encoder::encode($user->user_email.';'.$expired_time, env('APP_SECRET_KEY'));
+
+            Session::put('token', $token);
+            return response()->json(['message' => 'Not permitted', 'ok' => true], 200);
         } catch (Exception $e) {
             return $e;
         }
@@ -63,5 +62,10 @@ class AuthHelper
             return false;
         }
 
+    }
+
+    public static function logout()
+    {
+        Session::flush();
     }
 }

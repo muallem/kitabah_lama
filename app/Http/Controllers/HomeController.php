@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,6 @@ class HomeController extends Controller
         return view('home');
     }
     public function coba(){
-        return User::all();
-        return session()->get('user_id');
+        return Session::get('token');
     }
 }
