@@ -19,7 +19,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/', [AuthController::class, 'index'])->name('home');
     Route::get('/login', [AuthController::class, 'index'])->name('login.index');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
