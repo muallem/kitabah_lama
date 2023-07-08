@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" id="loginForm">
                         @csrf
 
                         <div class="row mb-3">
@@ -70,4 +70,43 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function() {
+        $('#loginForm').submit(function(event) {
+            event.preventDefault(); 
+            
+            var formData = new FormData(this);
+            
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    let data = response;
+                    if(data.message !== 'success'){
+                            Swal.fire({
+                            type: 'error',
+                            title: 'Login failed!',
+                            text: data.message,
+                        });
+                    }
+                    else{
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Login success!',
+                            text: data.message,
+                        });
+                        window.location.href = "/home";
+                    }
+
+                }
+            });
+        });
+    });
+</script>
 @endsection
