@@ -17,9 +17,11 @@ class AuthHelper
 {
     public static function login($user_email, $password)
     {
+        require_once '../../wp-includes/pluggable.php';
         try{
             $user = User::where("user_email", $user_email)->first();
             return $password;
+            return wp_check_password($password, $user->user_pass);
             if(password_verify($password, $user->user_pass)){
                 return $user;
             }
