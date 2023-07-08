@@ -87,8 +87,7 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    let data = JSON.parse(response);;
-                    console.log(data)
+                    console.log(response)
                     if(data.message !== 'success'){
                             Swal.fire({
                             type: 'error',
