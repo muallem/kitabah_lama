@@ -60,7 +60,7 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'wpjs_users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
             'user_email' => 'user_email',
