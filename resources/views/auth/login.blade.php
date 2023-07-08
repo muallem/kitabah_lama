@@ -88,18 +88,18 @@
                 contentType: false,
                 success: function(response) {
                     console.log(response)
-                    if(data.message !== 'success'){
+                    if(response.ok){
                             Swal.fire({
                             type: 'error',
                             title: 'Login failed!',
-                            text: data.message,
+                            text: response.message,
                         });
                     }
                     else{
                         Swal.fire({
                             type: 'success',
                             title: 'Login success!',
-                            text: data.message,
+                            text: response.message,
                         });
                         window.location.href = "/home";
                     }
