@@ -28,3 +28,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 Route::get('coba', [HomeController::class, 'coba']);
+Route::get('get_session', [HomeController::class, 'get_session']);

@@ -34,6 +34,8 @@ class AuthHelper
             $token = Encoder::encode($user->user_email.';'.$expired_time, env('APP_SECRET_KEY'));
 
             Session::put('token', $token);
+            Session::put('user_id', $user->id);
+            Session::put('user_role', $user->role);
             return response()->json(['message' => 'Not permitted', 'ok' => true], 200);
         } catch (Exception $e) {
             return $e;
@@ -50,14 +52,18 @@ class AuthHelper
                 $currentDate = Carbon::now();
     
                 if ($currentDate > $expirationDate) {
+                    Session::flush();
                     Session::forget('token');
                     return false;
                 } 
                 return true;
+
             }
+            Session::flush();
             Session::forget('token');
             return false;
         }catch(Exception $e){
+            Session::flush();
             Session::forget('token');
             return false;
         }
