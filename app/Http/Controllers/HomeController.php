@@ -27,15 +27,15 @@ class HomeController extends Controller
         return view('home');
     }
     public function get_session(){
-        // Retrieve all session data
         $allData = Session::all();
+        $data = [];
 
-        $data = array();
         // Loop through the session data
         foreach ($allData as $key => $value) {
             // Access individual session items
-            array_push($data, "Key: $key, Value: $value");
+            $data[] = "Key: $key, Value: " . json_encode($value);
         }
+
         return $data;
     }
 }
