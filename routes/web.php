@@ -19,6 +19,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/', [AuthController::class, 'index'])->name('home');
     Route::get('/login', [AuthController::class, 'index'])->name('login.index');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('coba', [HomeController::class, 'coba']);
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -27,5 +28,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/discussion', [App\Http\Controllers\DiscussionController::class, 'index'])->name('thesis.discussion');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-Route::get('coba', [HomeController::class, 'coba']);
 Route::get('get_session', [HomeController::class, 'get_session']);
