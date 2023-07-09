@@ -24,7 +24,7 @@ class HomeController extends Controller
         return view('home');
     }
     public function coba(){
-        return Session::get('token');
+        return view('home');
     }
     public function get_session(){
         // Retrieve all session data
