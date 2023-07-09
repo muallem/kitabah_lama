@@ -51,6 +51,7 @@
     @livewireStyles
 </head>
 <body>
+    App
     <div id="app">
         <div class="sidebar">
             <h3>Menu</h3>
